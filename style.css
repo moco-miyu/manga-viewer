@@ -1,38 +1,113 @@
-body {
+body, html {
   margin: 0;
-  background: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  touch-action: manipulation;
+  padding: 0;
+  background-color: black;
+  height: 100%;
+  overflow: hidden;
 }
 
 #viewer {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
   overflow: hidden;
 }
 
-#viewer canvas {
-  max-width: 100vw;
-  max-height: 100vh;
-  display: block;
-  margin: auto;
+#mangaCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.nav-btn {
+/* 矢印ボタンのエリア全体をタッチ可能にする */
+#prevBtn, #nextBtn {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.3);
+  top: 0;
+  bottom: 0;
+  width: 33%;
+  background-color: transparent;
   border: none;
-  color: white;
-  font-size: 2rem;
-  padding: 0.5em 0.8em;
+  cursor: pointer;
   z-index: 10;
 }
 
-#prevBtn { left: 10px; }
-#nextBtn { right: 10px; }
+#prevBtn {
+  left: 0;
+  text-align: left;
+}
+
+#nextBtn {
+  right: 0;
+  text-align: right;
+}
+
+#prevBtn::before, #nextBtn::before {
+  content: "<";
+  font-size: 48px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+
+#nextBtn::before {
+  content: ">";
+  right: 16px;
+}
+
+#prevBtn::before {
+  left: 16px;
+}
+
+/* スマホではボタンを非表示 */
+@media (max-width: 600px) {
+  #prevBtn, #nextBtn {
+    display: none;
+  }
+}
+
+/* ページ進行表示 */
+#progressContainer {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+  font-family: sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#progressContainer.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#progressText {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+#progressBar {
+  width: 80%;
+  height: 6px;
+  background-color: #444;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#progressFill {
+  height: 100%;
+  background-color: #00bfff;
+  width: 0%;
+  transition: width 0.3s ease;
+}
