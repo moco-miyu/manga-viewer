@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>テストビューア</title>
+  <title>マンガビューワー</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+<body>
   <div id="viewer">
+    <button id="prevBtn"></button>
     <canvas id="mangaCanvas"></canvas>
-    <button id="prevBtn" class="nav-btn">←</button>
-    <button id="nextBtn" class="nav-btn">→</button>
+    <button id="nextBtn"></button>
   </div>
+
+  <div id="progressContainer">
+    <div id="progressText">1 / 20</div>
+    <div id="progressBar">
+      <div id="progressFill"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
